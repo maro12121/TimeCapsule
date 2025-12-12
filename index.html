@@ -5,19 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Future Time Capsule</title>
     <link rel="stylesheet" href="styles.css">
-    <style>
-        /* Success message styling */
-        .success-message {
-            display: none;
-            text-align: center;
-            color: green;
-            margin-top: 15px;
-            font-weight: bold;
-        }
-        .success-message.show {
-            display: block;
-        }
-    </style>
 </head>
 <body>
     <div class="card">
@@ -25,9 +12,7 @@
             <h1>Future Time Capsule</h1>
             <p>Write a message to your future self.</p>
         </header>
-
-        <!-- Formspree form -->
-        <form action="https://formspree.io/f/mgvgrver" method="POST">
+        <form>
             <label for="email">Your Email</label>
             <input type="email" id="email" name="email" placeholder="example@email.com" required>
 
@@ -50,40 +35,21 @@
 
             <button type="submit">Submit</button>
         </form>
-
         <footer>
-            <h5>This is a demo front-end only (no backend email sending in the future).</h5>
+            <h5>This is a demo front-end only (no backend email sending).</h5>
         </footer>
-
-        <div id="successMessage" class="success-message">Message sent successfully!</div>
+        <div id="successMessage" class="success-message">Done</div>
     </div>
-
+    </body>
     <script>
-        const form = document.querySelector('form');
-        const successMsg = document.getElementById('successMessage');
-
-        form.addEventListener('submit', function(e) {
-            e.preventDefault(); // prevent default submission
-            const action = form.getAttribute('action');
-
-            // Send form data to Formspree
-            fetch(action, {
-                method: "POST",
-                body: new FormData(form),
-                headers: { 'Accept': 'application/json' }
-            }).then(response => {
-                if (response.ok) {
-                    // Show success message
-                    successMsg.classList.add('show');
-                    setTimeout(() => successMsg.classList.remove('show'), 2500);
-                    form.reset();
-                } else {
-                    alert("Oops! There was a problem sending your message.");
-                }
-            }).catch(error => {
-                alert("Oops! There was a problem sending your message.");
-            });
-        });
+    document.querySelector('form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        var msg = document.getElementById('successMessage');
+        msg.classList.add('show');
+        setTimeout(function() {
+            msg.classList.remove('show');
+        }, 2500);
+        this.reset();
+    });
     </script>
-</body>
 </html>
